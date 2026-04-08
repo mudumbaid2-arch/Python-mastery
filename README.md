@@ -1,6 +1,6 @@
 # Python Mastery
 
-This repository contains my progress and exercises while learning Python.
+this is a 6 month journey where i master python from the basics of conditional statements to more advance concepts like object oriented programing polymorphism and finally learn how to code for quantum computers
 
 ## 📂 Structure
 
