@@ -285,6 +285,63 @@ fruits.remove("apple") ### As you can see an error will come a tuple cant be alt
 
 
 
+### dictionaries 
+
+menu = {"pizza" : 3.00,  
+        "nachos": 2.50,
+        "pasta" : 5.99,
+        "chips" : 3.0,
+        "samosa": 5.50}
+total = 0
+cart = []
+for item , price in menu.items():
+    print(f"{item}:{price}")
+
+while True:
+    food = str(input("enter your food of choice "))
+    if menu.get(food) is not None:
+        cart.append(food)
+    elif food=="q":
+        break
+
+
+print(cart)
+
+for food in cart:
+    total = total+menu.get(food)
+    print(food , end = " ")
+print()
+
+print(f"total is {total:.2f}")
+
+
+
+
+### Number guessing game
+
+import random 
+low = int(input("enter the lower limit "))
+high = int(input("enter the higher limit "))
+count =0
+answer = random.randint(low,high)
+flag = True
+while flag:
+    guess = int(input(f"enter your guess between {low} and {high} "))
+    count+=1
+    if guess > answer:
+        print("your guess was too high please try again ")
+    elif guess<answer:
+        print("your guess was too low please try again ")
+    elif guess>high or guess<low:
+        print("the number you have chosen is out of range please try again ")
+    elif guess==answer:
+        flag = False
+      
+
+        
+print(f"you finally guessed the correct number {guess} , congrats!!!")
+print(f"you took {count} guesses to get it right")
+
 
 
 
