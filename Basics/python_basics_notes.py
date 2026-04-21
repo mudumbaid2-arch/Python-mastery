@@ -345,9 +345,189 @@ print(f"you took {count} guesses to get it right")
 
 
 
+### functions
+### are blocks of reusable code 
+### default values in a function can be replaced when passing an argument
+### makes your function more flexible and less typing
+### default argument always follow non default arguments
+### 
+def bill(price ,discount=0,tax=0.10):
+    return price*(1-discount)*(1+tax)
+
+print(bill(40))
+print (bill(40,0.25,0.2)) 
+### you may redefine the arguments as you wish whenever your calling your function
+
+import time
+def count(high , low=0): ##3 always assign a default argument AFTER A NON DEFUALT ONE
+    for x in range(low,high+1):
+        print(x)
+        time.sleep(0.5)
+    print("DONE!")
+print(count(1,10))
+print(count(30))
+print(count(30,19))
 
 
 
+### KEYWORD ARGUMENTS
+def get_phone(country,area,first,last):
+    return f"{country}-{area}-{first}-{last}"
+
+phonenum= print(get_phone(91,420,853,4669))
+print(get_phone(country=800,last=900,first=50,area=400))
+### as long as u define the argument your assigning you may assign the value in any order you wish
+
+
+
+### Iterables 
+### lists tuples sets and dictionaries and strings
+my_dictionary = {"a":1,"b":2,"c":3}
+for key in my_dictionary:
+    print(key , end=" ")          ### output a b c
+for value in my_dictionary.values:
+    print(value , end = " ")      ### output = 1 2 3
+for key,value in my_dictionary.items():
+    print(f"{key}={value}")
+
+
+
+
+### Membership operators 
+### in and not in
+### Tests to see if a value is present in a string/collection
+secret_word = "apple"
+guess = str(input("guess a letter that you think is present in the secret word"))
+if guess in secret_word:
+    print(f"the letter {guess} is present in the secret word")
+else:
+    print(f"the letter {guess} is  not present in the secret word")
+
+
+
+
+
+### list comprehensions
+lst =[]
+for i in range(1,11):
+    lst.append(i)
+print(lst)
+
+### using list comprehension 
+lst1 =[i for i in range(10)]        ### can create a list/set using just one line of code
+print(lst1)
+
+lst2 = {j for j in range(20) if j%2==0}     ### can even put conditional statements when creating the list/set
+print(lst2)
+
+squares = [x**2 for x in range(10)]
+print(squares)
+
+even_squares =[y**2 for y in range(10) if y%2==0 ]
+print(even_squares)
+
+### match case statements
+### it is used to replace many if and elif statements with a much more legible syntax
+
+def calories_burned(activity,speed,weight,duration):
+    if activity == "running" and speed <=8:
+        caloriesburnt= 8.3*weight*duration
+        return caloriesburnt
+    elif activity == "running" and 8<=speed<=10:
+        caloriesburnt = 9.8*weight*duration
+        return caloriesburnt
+    elif activity == "running" and 10<=speed<=12:
+        caloriesburnt = 11.5*weight*duration
+        return caloriesburnt
+    elif activity == "running" and 12<=speed<=14:
+        caloriesburnt= 12.8*weight*duration
+        return caloriesburnt
+    elif activity == "cycling" and 14<=speed<=16:
+        caloriesburnt = 4*weight*duration
+        return caloriesburnt
+    elif activity == "cycling" and 16<=speed<=20:
+        caloriesburnt=8*weight*duration
+        return caloriesburnt
+    elif activity == "cycling" and 22<=speed<=25:
+        caloriesburnt = 10*weight*duration
+        return caloriesburnt
+    elif activity == "walking" and speed <=3:
+        caloriesburnt = 2.5*weight*duration
+        return caloriesburnt
+    elif activity == "walking" and  3<= speed <= 4 :
+        caloriesburnt = 3.5*weight*duration
+        return caloriesburnt
+    elif activity == "walking" and 4<= speed <= 5.5:
+        caloriesburnt = 5*weight*duration
+        return caloriesburnt
+    else:
+        return "Error: The activity/speed you have chosen is not supported."
+
+
+
+
+
+### An alternative to using many elif statements
+### as you can see in the new and improved version it uses each activity 
+### as the specific case and then segregates accordingly making it wayy cleaner
+### syntax = match case return case
+### case_ is a wild card statement it will execute if the previous cases
+###  arent satisfied like an else block
+def calories_burned(activity,speed,weight,duration):
+    match activity:
+        case "running":
+            if speed <= 8:
+                caloriesburnt = 8.3 * weight * duration
+            elif 8 <= speed <= 10:
+                caloriesburnt = 9.8 * weight * duration
+            elif 10 <= speed <= 12:
+                caloriesburnt = 11.5 * weight * duration
+            elif 12 <= speed <= 14:
+                caloriesburnt = 12.8 * weight * duration
+            else:
+                return "Error: The activity/speed you have chosen is not supported."
+            return caloriesburnt
+        case "cycling":
+            if 14 <= speed <= 16:
+                caloriesburnt = 4 * weight * duration
+            elif 16 <= speed <= 20:
+                caloriesburnt = 8 * weight * duration
+            elif 22 <= speed <= 25:
+                caloriesburnt = 10 * weight * duration
+            else:
+                return "Error: The activity/speed you have chosen is not supported."
+            return caloriesburnt
+        case "walking":
+            if speed <= 3:
+                caloriesburnt = 2.5 * weight * duration
+            elif 3 <= speed <= 4:
+                caloriesburnt = 3.5 * weight * duration
+            elif 4 <= speed <= 5.5:
+                caloriesburnt = 5 * weight * duration
+            else:
+                return "Error: The activity/speed you have chosen is not supported."
+            return caloriesburnt
+        case _:
+            return "Error: The activity/speed you have chosen is not supported."
+
+
+
+
+### modules 
+### is a file containing specific data/code that you want to implement in your program
+### you call a module using the 'import' key word
+ 
+
+import math as m
+### print(math.pi) ### you can give the module you wanna import a nickname 
+### if your too lazy to type the entire thing but you must use that nickname to call 
+### values or functions from that module or else an eror will come
+print(m.pi)     ### this will run properly as you have nicknamed the module 
+
+
+### variable scope where a variable is visible and accessable
+### scope resolution local -> global -> enclosed -> built in (LEGB)
+### in prgrams the variables you define will output the value based on the LEGB order 
 
 
 

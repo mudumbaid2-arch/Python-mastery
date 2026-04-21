@@ -112,5 +112,55 @@ print(get_phone(country=800,last=900,first=50,area=400))
 
 
 
+### arbitrary arguments means the fucntion wil allow a varying number of arguments
+### *args = multiple arguments and **kwargs = multiple key word arguments
+def add(*nums):  ### replace parameters with *args to accept N number of parameters
+    total = 0
+    print(type(args))
+    for num in nums:
+        total=total+arg
+    print(total)
+add(1,2)
+
+
+def display_name(*names):
+    for name in names:
+        print(name)
+    print()
+
+
+
+
+
+
+
+
+### ---- SHIPPING LANE PROGRAM ----
+### *args   = ship multiple packages (varying number of items)
+### **kwargs = shipping details (destination, priority, weight etc.)
+
+def ship_order(order_id, *packages, **details):
+    print(f"\n ORDER ID: {order_id}")
+    print("   Packages being shipped:")
+    for package in packages:
+        print(f"     - {package}")
+    print("   Shipping Details:")
+    for key, value in details.items():
+        print(f"     {key}: {value}")
+    print("-" * 35)
+
+# single item, basic details
+ship_order(1001, "laptop", destination="Mumbai", priority="standard")
+
+# multiple items, more details
+ship_order(1002, "shoes", "shirt", "watch", destination="Delhi", priority="express", weight="2.3kg", fragile=False)
+
+# one heavy package with extra notes
+ship_order(1003, "refrigerator", destination="Chennai", priority="standard", weight="45kg", fragile=True, notes="handle with care")
+
+
+
+
+
 
 
