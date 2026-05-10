@@ -531,45 +531,470 @@ print(m.pi)     ### this will run properly as you have nicknamed the module
 
 
 
+### encryption program 
+import random
+import string
+chars = string.punctuation + string.digits + string.ascii_letters
+chars = list(chars)
+### print(chars)
+key = chars.copy()
+random.shuffle(key)
+### print(key)
+decrypted_word= []
+encrypted_word = []
+### for encryption 
+word =list(input("enter a word "))
+for char in word:
+    position=chars.index(char)
+    char=key[position]
+    encrypted_word.append(char)
+print(f"original word is {word}\n")
+print(f"encrypted word is {encrypted_word}\n" ) 
+
+
+### for decryption
+for char in encrypted_word:
+    position=key.index(char)
+    char=chars[position]
+    decrypted_word.append(char)
+print(f"decrypted word is {decrypted_word}\n")
+
+
+### rock paper scissors game
+import random
+options = ("rock","paper","scissors")
+
+flag = True
+while flag:
+    
+    player1 = str(input("enter an option(rock, paper, or scissors and q to quit) ")).lower()
+    player2 = random.choice(options)
+   
+    if player1=="q":
+        print("thanks for playing hope you had fun")
+        flag=False
+    elif player1=="rock" and player2=="paper" or player1=="paper" and player2=="scissors" or player1=="scissors" and player2=="rock":
+        print("player 2 has won")
+        print(f"computer chose: {player2}")
+    elif player2=="rock" and player1=="paper" or player2=="paper" and player1=="scissors" or player2=="scissors" and player1=="rock":
+        print("player 1 has won")
+        print(f"computer chose: {player2}")
+    elif player1 not in ( "rock" , "paper", "scissors" , "q") and player2 not in ( "rock", "paper",  "scissors" , "q" ):
+        print("please choose an apropriate option and try again")
+    elif player1 == player2 :
+        print("this is a draw please try again")
+
+
+### arbitrary arguments means the function will allow a varying number of arguments
+### *args = multiple arguments and **kwargs = multiple key word arguments
+def add(*args):  ### replace parameters with *args to accept N number of parameters
+    total = 0
+    print(type(args))
+    for num in args:
+        total=total+num
+    print(total)
+add(1,2)
+
+
+def display_name(*names):
+    for name in names:
+        print(name)
+    print()
+
+
+### ---- SHIPPING LANE PROGRAM ----
+### *args   = ship multiple packages (varying number of items)
+### **kwargs = shipping details (destination, priority, weight etc.)
+
+def ship_order(order_id, *packages, **details):
+    print(f"\n ORDER ID: {order_id}")
+    print("   Packages being shipped:")
+    for package in packages:
+        print(f"     - {package}")
+    print("   Shipping Details:")
+    for key, value in details.items():
+        print(f"     {key}: {value}")
+    print("-" * 35)
+
+# single item, basic details
+ship_order(1001, "laptop", destination="Mumbai", priority="standard")
+
+# multiple items, more details
+ship_order(1002, "shoes", "shirt", "watch", destination="Delhi", priority="express", weight="2.3kg", fragile=False)
+
+# one heavy package with extra notes
+ship_order(1003, "refrigerator", destination="Chennai", priority="standard", weight="45kg", fragile=True, notes="handle with care")
 
 
 
 
+### oop
+### an object is a group of related  atributes (variables) and methods (functions)
+### Ex : phone, book, cup ,glass, calculator 
+### method = function that belongs in an object / what the object can actually do 
+### for the phone it can be turn on/off make a call etc etc
+### methods simply define what and object can do and u write the logic 
+### for that program as a function
+### an atribute is something about the object /description of the object 
+### You need a "class" to create and store many objects
+### class = is the blueprint used to design the structure and layout of the object
+### MAIN goal define what our object has (atributes) and what it can do (methods)
+
+
+class car:
+    def __init__(self,name,engine_type,color ,year):
+        self.name = name
+        self.engine_type = engine_type
+        self.color = color
+        self.year = year
+    ### Methods : they define what an object can do 
+    def speed(self,velocity):
+       
+        if velocity>60:
+            print(f"you are driving the {self.year} {self.color} {self.name}  too fast , please slow down immediately")
+        else:
+            print(f"you are driving the {self.year} {self.color} {self.name} responsibly carry on")
+
+    def is_driving(self):
+        return True
+    def is_notdriving(self):
+        return True
+    def is_drinking(self):
+        print(f"you must never drive like that especially with a  {self.year} {self.color} {self.name}")
+    def cost(self,price):
+        if price> 50000:
+            print(f"wow your {self.color} {self.name} is very costly")
+        else:
+            print(f"wow your {self.color} {self.name} is reasonable and very cool")
+
+
+car1 = car("lambo","v12","blue" ,2010)
+car2 = car("ferari" , "v16" , "green" ,2005 ) ## when using the function you must
+### define evry single atribute and give it a specific input or else the program wont run
+### print(car1)   ### this output will give the memory location of the  object not the atributes 
+
+
+print(car1.color) ### the . operator will unpack the object and will output the atributes accordingly 
+print(car1.year)
+print(car1.engine_type)
+print(car2.engine_type)
+print(car2.speed(23))
+print(car1.speed(67))
+print(car1.is_driving())
+print(car2.is_drinking())
+print(car1.cost(12345))
+print(car2.cost(100000))
 
 
 
 
+### class variables 
+### are shared among all instances(objects) of a class
+### class variables defined outside the cunstructer
+### instance variables defined inside the constructor (means before the def__init__)
+### allows you to use them among all objects  through out the whole class 
+### object variable syntax = self.variable =
+### class variable syntax = class.variable = 
+class student:
+    num_students=0 ### class variable
+    def __init__(self ,name,age,height ):
+        self.name=name ### object variables
+        self.age = age
+        self.height = height
+        student.num_students+=1
+
+student1=student("bob",24,"5ft7")
+student2 =student("jack",23,"6ft3")
+student3 = student("jake",19,"5ft4")
+student4 = student("go",3,5)
+print(student.num_students)
+print(f"there are {student.num_students} students in this class ")
+print(student1.name)
+print(student2.name)
+print(student3.name)
+print(student4.name)
+
+
+### inheritance 
+### allows different  clases to adopt each others  atributes and methods 
+### helps with reusability and extensability
+class animals:
+    num=0
+    def __init__(self,name ):
+        self.name = name
+    def eat(self):
+        print(f"the {self.name} is eating")
+    def sleep(self):
+        print(f"the{self.name} is sleeping")
+    def is_alive(self):
+        return True
+    
+
+class Dog(animals):
+    def speak(self):
+        print("woof")
+class Cat(animals):
+    def speak(self):
+        print("meow")
+
+
+dog = Dog("scooby doo")
+cat= Cat("Garfield")
+print(dog.name)
+print(cat.name)
+dog.speak()
+cat.speak()
+dog.eat()
+cat.eat()
+dog.sleep()
+cat.sleep()
+print(animals.num)
+
+
+
+### mulitple inheritance = inherit from more thn 1 parent class C(a,b)
+### multi level inheritance = inherit from a parent which inherits from another parent
+class animal:                 ### this is both  multiple and multi level inheritance 
+    def __init__(self,name):
+        self.name=name
+    def eat(self):
+        print(f" {self.name} is eating")
+    def sleep(self):
+        print(f" {self.name} is sleeping")
+class predator(animal):
+    def hunt(self):
+        print(f"i hunt down animals and eat them so tasty")
+class prey(animal):
+    def flee(self):
+        print(f"i run away from {self.name}")
+
+class Rabbit (prey):
+    pass
+class Hawk(predator):
+    pass
+
+class Fish(predator,prey):
+    pass
+
+
+
+rabit = Rabbit("joe")
+fish = Fish("nemo")
+hawk = Hawk("tony")
+hawk.sleep()
+fish.hunt()
+fish.flee()
 
 
 
 
+### OOP PRACTICE CHALLENGES
+### Try to solve these below each comment!
+
+# 1. CLASS vs INSTANCE VARIABLES
+# Create a class "Employee". 
+# - Give it a class variable "company_name" (all employees work at the same place).
+# - Give it instance variables "name" and "salary".
+# - Create two employees and print their info + the company name.
+
+class Employee:
+    company_name="google"
+    def __init__(self,name , salary):
+        self.name=name
+        self.salary=salary
+        print(f"my name is {self.name} ,i work in {Employee.company_name} , and i earn {self.salary}  dollars per month")
+
+employee1=Employee("joe" , 1000)
+employee2=Employee("Jack" , 2000)
 
 
 
 
+# 2. METHOD OVERRIDING
+# Create a class "Electronic". Give it a method "power_on" that prints "System starting...".
+# Create a child class "Laptop". 
+# Override the "power_on" method so that for Laptops it prints "Laptop booting up..."
+class Electronic:
+    def power_on(self):
+        print("system is starting up .....")
+    
+class Laptop(Electronic):
+    def power_on(self):
+        print("Laptop booting up...")
+
+
+laptop = Laptop()
+laptop.power_on()
+# 3. MULTIPLE INHERITANCE
+# Create a class "Camera" with a method "take_photo".
+# Create a class "Phone" with a method "make_call".
+# Create a class "SmartPhone" that inherits from BOTH and can do both actions.
+class Camera:
+    def take_photo(self):
+        print("this device has taken a photo")
+
+class Phone:
+    def make_call(self):
+        print("this device is now making a call")
+    
+class Smartphone(Camera,Phone):
+    pass
+
+smartphone = Smartphone()
+smartphone.make_call()
+smartphone.take_photo()
+
+
+
+# 4. MULTI-LEVEL INHERITANCE
+# Create a chain: Vehicle -> Car -> ElectricCar.
+# - Vehicle should have a method "go".
+# - Car should have a method "open_trunk".
+# - ElectricCar should have a method "charge".
+# Create an ElectricCar object and see if it can access all three methods.
+
+class Vehicle:
+    def go(self):
+        print("this vehicle is driving")
+    
+class Car:
+    def open_trunk(self):
+        print("this cars trunk is opening")
+
+class ElectricCar(Vehicle,Car):
+    def charge(self):
+        print("this vehicle is now charging")
+        
+vehicle = Vehicle()
+car= Car()
+electriccar = ElectricCar()
+electriccar.go()
+electriccar.open_trunk()
+electriccar.charge()
+
+
+
+### super() = Function used in child class to call methods from a parent class (superclass)
+### adv = extends functionality and reusability of methods across different types of clases
+
+class Shape:
+    def __init__(self ,color,is_filled):
+        self.color=color
+        self.is_filled=is_filled
+    def describe(self):
+        print(f"the shape is {self.color} in color ")
+        print(f"is the shape filled up ? {self.is_filled}")
+    def __str__(self):
+        return str(vars(self))
+       
+import math 
+class Circle(Shape):
+    def __init__(self,color,is_filled,radius):
+        self.radius=radius
+        super().__init__(color,is_filled)
+    def __str__(self):
+        return str(vars(self))
+    def area(self):
+        print(f"this circle has an area of {self.radius*self.radius*math.pi:.2f}cm^2 ")
+    def perimeter(self):
+        print(f"the perimeter of the circle is {self.radius*math.pi*2:.2f}cm")
+    def describe(self):
+        print("i have no edges")
+        super().describe()  ### i can call the old desribe method from the parent class 
+        ### as well as create a new describe method that will execute in the child class
+class Square(Shape):
+    def __init__(self,color,is_filled,length):
+        self.length=length
+        super().__init__(color,is_filled)
+    def __str__(self):
+        return str(vars(self))
+    def area(self):
+        print(f"the area of this square is {self.length*self.length}cm^2")
+    def perimeter(self):
+        print(f"the perimeter of this square is {4*self.length}cm")
+
+
+class Triangle(Shape):
+    def __init__(self,color,is_filled,length,height):
+        self.height = height
+        self.length = length
+        super().__init__(color,is_filled)
+    def __str__(self):
+        return str(vars(self))
+    def area(self):
+        print(f"the area of this triangle is {0.5*self.length*self.height}cm^2")
+    
+
+
+circle = Circle("blue",True,5)
+triangle = Triangle("grenn",False,5,10)
+square = Square("pink",True,9)
+square.describe()
+triangle.describe()
+print(circle,square,triangle, sep = "\n")
+circle.area()
+circle.perimeter()
+triangle.area()
+square.area()
+square.perimeter()
+circle.area()
+circle.describe() ### if i define a new method in the child class it will overide 
+### the old method defined in the parent class . this is called method overriding 
 
 
 
 
+### conclusion
+###  the self function allows us to define a parent class that has all the 
+### common atributes that the children clases have so we dont need to define the logic again
+###  we can simply  reuse that code 
+### the __str__ method prints all the methods out as a string
 
 
 
+# 5. THE CHALLENGE: THE super() KEYWORD
+# Research or try to guess: How do you use the super() function?
+# Create a parent "Person" that takes a "name" in its __init__.
+# Create a child "Student" that takes "name" AND "grade".
+# Use super().__init__(name) inside the Student to let the parent handle the name!
 
+class Person:
+    def __init__(self, name):
+        self.name = name
 
+class Student(Person):
+    def __init__(self, name, grade):
+        super().__init__(name)
+        self.grade = grade
+    def __str__(self):
+        return str(vars(self))
 
+student1 = Student("bob", 9)
+print(f"Student Check: {student1}")
 
+print("\n" + "="*30 + "\n")
 
+### BOSS-LEVEL OOP CHALLENGES
 
+# 1. THE LOCKED VAULT (Encapsulation)
+# - Create a class "BankAccount".
+# - Make the "balance" attribute PRIVATE (use two underscores: self.__balance).
+# - Create a method "deposit" to add money.
+# - Create a method "get_balance" to see the money.
+# - CHALLENGE: Try to print "account.__balance" from outside the class. What happens?
 
+class BankAccount:
+    def __init__(self, balance):
+        self.__balance = balance  # Private variable
 
+    def deposit(self, amount):
+        self.__balance += amount
+        print(f"${amount} dollars has been deposited in your account.")
 
+    def get_balance(self):
+        print(f"You have ${self.__balance} in your account.")
 
-
-
-
-
-
-
-
-
-
+# Create an instance (MUST use parentheses!)
+account = BankAccount(100)
+account.deposit(50)
+account.get_balance()
