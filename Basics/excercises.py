@@ -1,24 +1,4 @@
-# 5. THE CHALLENGE: THE super() KEYWORD
-# Research or try to guess: How do you use the super() function?
-# Create a parent "Person" that takes a "name" in its __init__.
-# Create a child "Student" that takes "name" AND "grade".
-# Use super().__init__(name) inside the Student to let the parent handle the name!
 
-class Person:
-    def __init__(self, name):
-        self.name = name
-
-class Student(Person):
-    def __init__(self, name, grade):
-        super().__init__(name)
-        self.grade = grade
-    def __str__(self):
-        return str(vars(self))
-
-student1 = Student("bob", 9)
-print(f"Student Check: {student1}")
-
-print("\n" + "="*30 + "\n")
 
 ### BOSS-LEVEL OOP CHALLENGES
 
@@ -62,13 +42,64 @@ account.get_balance()
 # - Create a child class "Cardio" that adds an "avg_heart_rate" attribute.
 # - Create a child class "Strength" that adds "sets" and "reps" attributes.
 # - Use super().__init__ in both child classes!
+class Exercise:
+    def __init__(self,name,duration):
+        self.name=name
+        self.duration=duration
+class Cardio(Exercise):
+    def __init__(self,name,duration,avg_heartbeat):
+        super().__init__(name,duration)
+        self.avg_heartbeat=avg_heartbeat
+   
+class Strength(Exercise):
+    def __init__(self,name,sets,reps,duration):
+        self.sets=sets
+        self.reps=reps
+        super().__init__(name,duration)
+
+exercise=Exercise("running",20)
+cardio = Cardio("running",20,170)
+strength=Strength("bench press",3,12,15)
+print(cardio.avg_heartbeat)
+print(strength.name)
 
 
-# 3. THE WORKOUT LOG (Composition)
-# - Create a class "WorkoutSession".
+### 3. THE WORKOUT LOG (Composition)
+### - Create a class "WorkoutSession".
 # - It should have a date and an empty list called "exercise_list".
 # - Create a method "add_exercise(self, exercise)" that adds an Exercise object to the list.
 # - Create a method "summary(self)" that prints the name of every exercise in that session.
+class Workoutsession:
+    def __init__(self):
+        self.lst = []
+
+    def date(self):
+        year=2026
+        for i in range(1,13):
+            if i%2!=0:
+                for j in range(1,32):
+                    date = j,i ,year
+                    print(date)
+            elif i==2:
+                for j in range(1,28):
+                    date=j,2,year
+                    print(date)
+            elif i%2==0:
+                for j in range(1,31):
+                    date =j,i ,year
+                    print(date)
+
+    def add_exercise(self, *args):
+        for ex in args:
+            self.lst.append(ex)
+
+    def summary(self):
+        print(f"this is the list of excercises you have done in todays session: {self.lst}")
+
+my_session = Workoutsession()
+# my_session.date() # Commented this out so it doesn't print 365 lines!
+my_session.add_exercise("bench")
+my_session.summary()
 
 
 # 4. CALORIE BURNER (Polymorphism / Overriding)
