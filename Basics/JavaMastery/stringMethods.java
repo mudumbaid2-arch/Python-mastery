@@ -49,22 +49,7 @@ public class stringMethods {
         String domain = email.substring(4); //if no end index is defined itll print everything after the starting index
         System.out.printf("my domain is %s\n" ,domain);
         System.out.printf("my username is %s\n" ,username);
-        
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    }
-
+        }
 }
 
         
