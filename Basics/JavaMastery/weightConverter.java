@@ -33,32 +33,6 @@ public class weightConverter{
 
             }
         }
-
-       
-
-
-        
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         scanner.close();
 
     }
